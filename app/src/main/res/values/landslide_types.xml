@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="landslides">
+        <item>Complex</item>
+        <item>Creep</item>
+        <item>Debris Flow</item>
+        <item>Earth Flow</item>
+        <item>Lahar</item>
+        <item>Landslide</item>
+        <item>Mudslide</item>
+        <item>Other</item>
+        <item>Riverbank Collapse</item>
+        <item>Rockfall</item>
+        <item>Rockslide</item>
+        <item>Snow Avalanche</item>
+        <item>Unknown</item>
+    </string-array>
+</resources>
