@@ -18,7 +18,8 @@
         android:layout_gravity="center"
         android:backgroundTint="@color/colorAccent"
         android:onClick="openPicker"
-        android:text="Get Nearest Location" />
+        android:text="Get Nearest Location"
+        android:textColor="@color/tw__solid_white" />
 
     <EditText
         android:id="@+id/input_nearestLoc"
@@ -166,5 +167,6 @@
         android:layout_gravity="center"
         android:backgroundTint="@color/colorAccent"
         android:onClick="submitReport"
-        android:text="Submit" />
+        android:text="Submit"
+        android:textColor="@color/tw__solid_white" />
 </LinearLayout>
