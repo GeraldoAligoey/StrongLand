@@ -1,11 +1,8 @@
 package me.eljae.strongland;
 
-import android.annotation.SuppressLint;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.graphics.Color;
-import android.icu.text.DecimalFormat;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +29,7 @@ public class Forecast extends Fragment implements AdapterView.OnItemSelectedList
     DataPoint empty2 = new DataPoint(3, 0);
 
     private void drawGraph(DataPoint historical, DataPoint current_mte){
-        //graph = (GraphView)findViewById(R.id.graph);
+        graph = (GraphView)getActivity().findViewById(R.id.graph);
         graph.removeAllSeries();
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{
                 historical,current_mte
@@ -84,37 +81,40 @@ public class Forecast extends Fragment implements AdapterView.OnItemSelectedList
                 probability = "extremely high";
                 tv_prediction.setTextColor(Color.RED);
             }
-          /*  @SuppressLint("NewApi") DecimalFormat df = new DecimalFormat("####0.00");
-            String stmt = "Average rainfall " + raise_fell + " by " + df.format(chance) + "% compared to last year.";
+
+            String stmt = "Average rainfall " + raise_fell + " by " + String.format("%.2f",chance) + "% compared to last year.";
             stmt += "\nChance of landslide is " + probability + ".";
-            tv_prediction.setText(stmt); */
+            tv_prediction.setText(stmt);
         }
     }
-
-    /*@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-      //  tv_prediction = (TextView)findViewById(R.id.tv_prediction);
-       // Spinner spinner = (Spinner)findViewById(R.id.spinner);
-        //create an array adapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.countries_array, android.R.layout.simple_spinner_dropdown_item);
-        //specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //apply the adapter to the spinner
-       // spinner.setAdapter(adapter);
-     //   spinner.setOnItemSelectedListener(this);
-
-        historical = new DataPoint(1, 0);
-        current_mte = new DataPoint(3, 0);
-
-        drawGraph(historical, current_mte);
-    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         return inflater.inflate(R.layout.activity_forecast, container, false);
+    }
+
+    @Override
+    public void onCreate(Bundle saveInstanceState){
+        super.onCreate(saveInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        tv_prediction = (TextView)view.findViewById(R.id.tv_prediction);
+        Spinner spinner = (Spinner)view.findViewById(R.id.spinner);
+        //create an array adapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.countries_array, android.R.layout.simple_spinner_dropdown_item);
+        //specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+
+        historical = new DataPoint(1, 0);
+        current_mte = new DataPoint(3, 0);
+
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {

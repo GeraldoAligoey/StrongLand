@@ -18,9 +18,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import io.fabric.sdk.android.Fabric;
 
 public class TabActivity extends AppCompatActivity
 {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "A8oAAbDaPBwd0x07smGlCydeP";
+    private static final String TWITTER_SECRET = "00vCAlrEk5J7skT0drIvtEP6FOcpz63mPOU3zKcrduIY6LRfUJ";
+
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -40,6 +48,8 @@ public class TabActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
         setContentView(R.layout.activity_tab);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -148,7 +158,7 @@ public class TabActivity extends AppCompatActivity
                     return news;
                 case 3:
                     Forecast forecast = new Forecast();
-                    //return forecast;
+                    return forecast;
             }
 
             return null;
