@@ -100,13 +100,16 @@ public class DataAdapter {
             List<CustomData> data = new ArrayList<>();
 
             String sql = "SELECT " + DB_COLUMN_LAT + ", " + DB_COLUMN_LONG + ", " + DB_COLUMN_NEAREST +
-                    ", " + DB_COLUMN_COUNTRY + " FROM " + DB_TABLE + ";";
+                    ", " + DB_COLUMN_COUNTRY + ", " + DB_COLUMN_TSTAMP  + ", " + DB_COLUMN_TRIGGER +
+                    ", " + DB_COLUMN_L_SIZE + ", " + DB_COLUMN_L_TYPE +
+                    " FROM " + DB_TABLE + ";";
             Cursor mCur = mDb.rawQuery(sql, null);
 
             mCur.moveToFirst();
 
             while(!mCur.isAfterLast()) {
-                data.add(new CustomData(mCur.getString(0), mCur.getString(1), mCur.getString(2), mCur.getString(3)));
+                data.add(new CustomData(mCur.getString(0), mCur.getString(1), mCur.getString(2), mCur.getString(3),
+                        mCur.getString(4), mCur.getString(5), mCur.getString(6), mCur.getString(7)));
                 mCur.moveToNext();
             }
 
