@@ -1,56 +1,53 @@
 package me.eljae.strongland;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TabHost;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener
+public class MainActivity extends AppCompatActivity
 {
-    private static Button btn_forecast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_add_new_record);
 
-        TabHost tabHost = (TabHost)findViewById(R.id.tabHost);
-        tabHost.setup();
+        final String DEFAULT_COUNTRY = "Malaysia";
 
-        // Main tab
-        TabHost.TabSpec spec = tabHost.newTabSpec("Main");
-        spec.setContent(R.id.mainTab);
-        spec.setIndicator("Main");
-        tabHost.addTab(spec);
+        /**
+         * SPINNER : COUNTRY
+         */
+        Locale[] locale = Locale.getAvailableLocales();
+        ArrayList<String> countries = new ArrayList<String>();
+        String country;
 
-        // Information tab
-        spec = tabHost.newTabSpec("Information");
-        spec.setContent(R.id.infoTab);
-        spec.setIndicator("Info");
-        tabHost.addTab(spec);
-
-        // News tab
-        spec = tabHost.newTabSpec("News");
-        spec.setContent(R.id.newsTab);
-        spec.setIndicator("News");
-        tabHost.addTab(spec);
-
-        // Forecast tab
-        spec = tabHost.newTabSpec("Forecast");
-        spec.setContent(R.id.forecastTab);
-        spec.setIndicator("Forecast");
-        tabHost.addTab(spec);
-
-        btn_forecast = (Button)findViewById(R.id.btn_forecast);
-        btn_forecast.setOnClickListener(this);
-    }
-
-    public void onClick(View view){
-        if(view.equals(btn_forecast)){
-            Intent i = new Intent(getApplicationContext(), Forecast.class);
-            startActivity(i);
+        for (Locale loc : locale) {
+            country = loc.getDisplayCountry();
+            if (country.length() > 0 && !countries.contains(country)) {
+                countries.add(country);
+            }
         }
+
+        Collections.sort(countries, String.CASE_INSENSITIVE_ORDER);
+
+        Spinner citizenship = (Spinner) findViewById(R.id.input_country);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, countries);
+        citizenship.setAdapter(adapter);
+
+        int spinner_pos = adapter.getPosition(DEFAULT_COUNTRY);
+        citizenship.setSelection(spinner_pos);
+
+        /**
+         * SPINNER : HAZARD TYPE
+         */
+        ArrayList<String> hazardTypes = new ArrayList<String>();
+        hazardTypes.add("Landslide");
+
+        Spinner input_hazard = (Spinner) findViewById(R.id.input_hazardType);
+        ArrayAdapter<String> hazard_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, hazardTypes);
+        input_hazard.setAdapter(hazard_adapter);
+
+
     }
 }
