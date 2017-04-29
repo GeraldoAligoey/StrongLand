@@ -52,7 +52,7 @@ public class DataAdapter {
 
     public Cursor getTestData() {
         try {
-            String sql = "SELECT * FROM myTable";
+            String sql = "SELECT * FROM glc_data";
 
             Cursor mCur = mDb.rawQuery(sql, null);
             if (mCur != null) {
