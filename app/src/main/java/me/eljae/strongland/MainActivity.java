@@ -13,9 +13,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
-        TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
+       /* TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
         tabHost.setup();
 
         TabHost.TabSpec spec;
@@ -34,32 +35,30 @@ public class MainActivity extends AppCompatActivity
         spec.setIndicator("Information");
         intent = new Intent(this, AddNewRecord.class);
         spec.setContent(intent);
-     //   tabHost.addTab(spec);
+        //   tabHost.addTab(spec);
 
         // News tab
         spec = tabHost.newTabSpec("news");
         spec.setIndicator("News");
         intent = new Intent(this, News.class);
         spec.setContent(intent);
-     //   tabHost.addTab(spec);
+        //   tabHost.addTab(spec);
 
         // Forecast tab
         spec = tabHost.newTabSpec("Forecast");
         spec.setIndicator("Forecast");
         intent = new Intent(this, Forecast.class);
         spec.setContent(intent);
-      //  tabHost.addTab(spec);
+        //  tabHost.addTab(spec);
 
         tabHost.setCurrentTab(1);
 
-        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener()
-        {
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
-            public void onTabChanged(String tabId)
-            {
+            public void onTabChanged(String tabId) {
                 // display the name of the tab whenever a tab is changed
                 Toast.makeText(getApplicationContext(), tabId, Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 }

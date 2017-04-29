@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="triggers">
+        <item>Construction</item>
+        <item>Continuous Rain</item>
+        <item>Dam Embankment Collapse</item>
+        <item>Downpour</item>
+        <item>Earthquake</item>
+        <item>Flooding</item>
+        <item>Freeze Thaw</item>
+        <item>Mining/Digging</item>
+        <item>Monsoon</item>
+        <item>Rain</item>
+        <item>Snowfall/Snowmelt</item>
+        <item>Tropical Cyclone</item>
+        <item>Volcano</item>
+    </string-array>
+</resources>

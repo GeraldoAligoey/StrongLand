@@ -12,6 +12,8 @@
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyABD9U6u2Qh3bK-kKiN3qQPrwe-TNzXDRg" />
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
