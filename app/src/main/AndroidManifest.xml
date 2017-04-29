@@ -10,7 +10,7 @@
     <!-- Google MAP API key -->
     <meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyABD9U6u2Qh3bK-kKiN3qQPrwe-TNzXDRg" />
+        android:value="YOURAPIKEY" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
@@ -21,6 +21,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR API KEY"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
