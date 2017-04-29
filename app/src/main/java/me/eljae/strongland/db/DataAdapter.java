@@ -11,7 +11,11 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import me.eljae.strongland.model.CustomData;
 
 /**
  * Created by gma on 29/04/2017.
@@ -85,6 +89,29 @@ public class DataAdapter {
                     + mCur.getString(2) + " " + mCur.getString(4));
 
             return mCur;
+        } catch (SQLException mSQLException) {
+            Log.e(TAG, "getTestData >>" + mSQLException.toString());
+            throw mSQLException;
+        }
+    }
+
+    public List<CustomData> getMarkerData() {
+        try {
+            List<CustomData> data = new ArrayList<>();
+
+            String sql = "SELECT " + DB_COLUMN_LAT + ", " + DB_COLUMN_LONG + ", " + DB_COLUMN_NEAREST +
+                    ", " + DB_COLUMN_COUNTRY + " FROM " + DB_TABLE + ";";
+            Cursor mCur = mDb.rawQuery(sql, null);
+
+            mCur.moveToFirst();
+
+            while(!mCur.isAfterLast()) {
+                data.add(new CustomData(mCur.getString(0), mCur.getString(1), mCur.getString(2), mCur.getString(3)));
+                mCur.moveToNext();
+            }
+
+            mCur.close();
+            return data;
         } catch (SQLException mSQLException) {
             Log.e(TAG, "getTestData >>" + mSQLException.toString());
             throw mSQLException;
