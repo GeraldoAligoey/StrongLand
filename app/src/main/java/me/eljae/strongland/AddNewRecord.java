@@ -4,10 +4,11 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -23,31 +24,36 @@ import java.util.List;
 
 import me.eljae.strongland.db.DataAdapter;
 
-public class AddNewRecord extends AppCompatActivity {
+import static android.app.Activity.RESULT_OK;
+
+public class AddNewRecord extends Fragment {
     private int PLACE_PICKER_REQUEST = 1;
     private EditText country, lat, lng, nearestLoc, population;
     Spinner input_landslideTypes, input_landslideSize, input_triggerTypes;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_record);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_add_new_record, container, false);
+    }
 
-        DataAdapter dataAdapter = new DataAdapter(this.getApplicationContext());
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        DataAdapter dataAdapter = new DataAdapter(this.getContext());
         dataAdapter.createDatabase();
 
-        nearestLoc = (EditText) findViewById(R.id.input_nearestLoc);
-        country = (EditText) findViewById(R.id.input_country);
-        lat = (EditText) findViewById(R.id.input_latitude);
-        lng = (EditText) findViewById(R.id.input_longitude);
-        population = (EditText) findViewById(R.id.input_population);
+        nearestLoc = (EditText) getView().findViewById(R.id.input_nearestLoc);
+        country = (EditText) getView().findViewById(R.id.input_country);
+        lat = (EditText) getView().findViewById(R.id.input_latitude);
+        lng = (EditText) getView().findViewById(R.id.input_longitude);
+        population = (EditText) getView().findViewById(R.id.input_population);
 
         /**
          * SPINNER : LANDSLIDE TYPE
          */
-        input_landslideTypes = (Spinner) findViewById(R.id.input_landslideTypes);
+        input_landslideTypes = (Spinner) getView().findViewById(R.id.input_landslideTypes);
 
-        ArrayAdapter<CharSequence> adapter_landslides = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> adapter_landslides = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.landslides, android.R.layout.simple_spinner_item);
 
         adapter_landslides.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -56,9 +62,9 @@ public class AddNewRecord extends AppCompatActivity {
         /**
          * SPINNER : LANDSLIDE SIZE
          */
-        input_landslideSize = (Spinner) findViewById(R.id.input_landslideSizes);
+        input_landslideSize = (Spinner) getView().findViewById(R.id.input_landslideSizes);
 
-        ArrayAdapter<CharSequence> adapter_landslideSizes = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> adapter_landslideSizes = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.landslide_sizes, android.R.layout.simple_spinner_item);
 
         adapter_landslideSizes.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -67,23 +73,30 @@ public class AddNewRecord extends AppCompatActivity {
         /**
          * SPINNER : TRIGGER TYPE
          */
-        input_triggerTypes = (Spinner) findViewById(R.id.input_triggerTypes);
+        input_triggerTypes = (Spinner) getView().findViewById(R.id.input_triggerTypes);
 
-        ArrayAdapter<CharSequence> adapter_triggers = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> adapter_triggers = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.triggers, android.R.layout.simple_spinner_item);
 
         adapter_landslides.setDropDownViewResource(android.R.layout.simple_spinner_item);
         input_triggerTypes.setAdapter(adapter_triggers);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                Place place = PlacePicker.getPlace(data, this);
+                Place place = PlacePicker.getPlace(data, this.getContext());
                 nearestLoc.setText(place.getAddress());
                 country.setText(getCountry(place));
-                lat.setText(String.format(String.valueOf(place.getLatLng().latitude)));
-                lng.setText(String.format(String.valueOf(place.getLatLng().longitude)));
+                lat.setText(String.valueOf(place.getLatLng().latitude));
+                lng.setText(String.valueOf(place.getLatLng().longitude));
             }
         }
     }
@@ -92,16 +105,14 @@ public class AddNewRecord extends AppCompatActivity {
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
         try {
-            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
+            startActivityForResult(builder.build(this.getContext()), PLACE_PICKER_REQUEST);
+        } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
         }
     }
 
     public String getCountry(Place place) {
-        Geocoder geocoder = new Geocoder(this);
+        Geocoder geocoder = new Geocoder(this.getContext());
         String country = "Unable to get country";
 
         try {
@@ -116,7 +127,7 @@ public class AddNewRecord extends AppCompatActivity {
     }
 
     public void submitReport(View view) {
-        DataAdapter dataAdapter = new DataAdapter(getApplicationContext());
+        DataAdapter dataAdapter = new DataAdapter(this.getContext());
 
         dataAdapter.open();
 
@@ -129,12 +140,12 @@ public class AddNewRecord extends AppCompatActivity {
             if (dataAdapter.saveCrowdSourcingData(country.getText().toString(), latLng,
                     nearestLoc.getText().toString(), input_triggerTypes.getSelectedItem().toString(),
                     input_landslideSize.getSelectedItem().toString(), input_landslideTypes.getSelectedItem().toString(), population.getText().toString())) {
-                Toast.makeText(this, "Report Submitted",
+                Toast.makeText(this.getContext(), "Report Submitted",
                         Toast.LENGTH_LONG).show();
             }
 
         } else {
-            Toast.makeText(this, "Please fill all the input",
+            Toast.makeText(this.getContext(), "Please fill all the input",
                     Toast.LENGTH_LONG).show();
         }
 
@@ -145,12 +156,9 @@ public class AddNewRecord extends AppCompatActivity {
     public boolean allInputFilled(String country, String lat, String lng, String nearest,
                                   String ls_trigger, String ls_size, String ls_type, String population) {
 
-        if (country.isEmpty() || lat.isEmpty() || lng.isEmpty() ||
+        return !(country.isEmpty() || lat.isEmpty() || lng.isEmpty() ||
                 nearest.isEmpty() || ls_size.isEmpty() ||
-                ls_trigger.isEmpty() || ls_type.isEmpty() || population.isEmpty()) {
-            return false;
-        }
+                ls_trigger.isEmpty() || ls_type.isEmpty() || population.isEmpty());
 
-        return true;
     }
 }
