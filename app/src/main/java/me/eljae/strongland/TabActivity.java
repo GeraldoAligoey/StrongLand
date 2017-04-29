@@ -148,7 +148,7 @@ public class TabActivity extends AppCompatActivity
                     return news;
                 case 3:
                     Forecast forecast = new Forecast();
-                    return forecast;
+                    //return forecast;
             }
 
             return null;
