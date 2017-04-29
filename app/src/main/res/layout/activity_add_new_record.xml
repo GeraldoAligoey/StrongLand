@@ -2,18 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_record"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="left"
-    android:id="@+id/new_record"
+    android:orientation="vertical"
+    android:padding="30dp"
     tools:context="me.eljae.strongland.AddNewRecord">
 
 
     <Button
         android:id="@+id/btn_getLoc"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/colorAccent"
         android:onClick="openPicker"
         android:text="Get Nearest Location" />
 
@@ -24,7 +27,7 @@
         android:ems="10"
         android:hint="Nearest Location"
         android:inputType="textPersonName"
-        />
+        android:padding="20dp" />
 
     <EditText
         android:id="@+id/input_country"
@@ -33,7 +36,7 @@
         android:ems="10"
         android:hint="Country"
         android:inputType="textPersonName"
-        />
+        android:padding="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,21 +48,22 @@
             android:id="@+id/input_latitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:layout_weight="1"
+            android:ems="10"
             android:hint="Latitude"
             android:inputType="textPersonName"
-            />
+            android:paddingBottom="20dp"
+            android:paddingLeft="20dp" />
 
         <EditText
             android:id="@+id/input_longitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:layout_weight="1"
+            android:ems="10"
             android:hint="Longitude"
             android:inputType="textPersonName"
-            />
+            android:paddingBottom="20dp" />
     </LinearLayout>
 
     <EditText
@@ -68,12 +72,15 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Estimated Population"
-        android:inputType="number" />
+        android:inputType="number"
+        android:padding="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
         android:weightSum="2">
 
         <TextView
@@ -98,8 +105,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
         android:weightSum="2">
 
         <TextView
@@ -124,8 +133,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
         android:weightSum="2">
 
         <TextView
@@ -149,8 +161,10 @@
 
     <Button
         android:id="@+id/btn_submit"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/colorAccent"
         android:onClick="submitReport"
         android:text="Submit" />
 </LinearLayout>
