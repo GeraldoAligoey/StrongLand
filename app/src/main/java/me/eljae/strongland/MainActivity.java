@@ -3,6 +3,8 @@ package me.eljae.strongland;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.Toast;
 
@@ -10,11 +12,22 @@ import com.google.android.gms.maps.*;
 
 public class MainActivity extends AppCompatActivity
 {
+    private static Button btn_forecast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        btn_forecast = (Button)findViewById(R.id.btn_forecast);
+
+        btn_forecast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Forecast.class);
+                startActivity(i);
+            }
+        });
 
        /* TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
         tabHost.setup();
