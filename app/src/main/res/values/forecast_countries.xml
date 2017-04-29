@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="countries_array">
+        <item>Kuala Lumpur, Malaysia</item>
+        <item>Kamloops, Canada</item>
+        <item>Osaka, Japan</item>
+        <item>Tokyo, Japan</item>
+        <item>Itanagar, India</item>
+    </string-array>
+</resources>

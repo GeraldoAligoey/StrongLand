@@ -1,12 +1,15 @@
 package me.eljae.strongland;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TabHost;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
-
+    private static Button btn_forecast;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -25,7 +28,7 @@ public class MainActivity extends AppCompatActivity
         // Information tab
         spec = tabHost.newTabSpec("Information");
         spec.setContent(R.id.infoTab);
-        spec.setIndicator("Information");
+        spec.setIndicator("Info");
         tabHost.addTab(spec);
 
         // News tab
@@ -39,5 +42,15 @@ public class MainActivity extends AppCompatActivity
         spec.setContent(R.id.forecastTab);
         spec.setIndicator("Forecast");
         tabHost.addTab(spec);
+
+        btn_forecast = (Button)findViewById(R.id.btn_forecast);
+        btn_forecast.setOnClickListener(this);
+    }
+
+    public void onClick(View view){
+        if(view.equals(btn_forecast)){
+            Intent i = new Intent(getApplicationContext(), Forecast.class);
+            startActivity(i);
+        }
     }
 }
