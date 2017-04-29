@@ -10,7 +10,7 @@
     <!-- Google MAP API key -->
     <meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value="YOURAPIKEY" />
+        android:value="AIzaSyB3UTTMZQ6zj1CWxSZ5TUvvLu-MqA7a6-s" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -23,7 +23,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR API KEY" />
+            android:value="AIzaSyB3UTTMZQ6zj1CWxSZ5TUvvLu-MqA7a6-s" />
 
         <activity android:name=".AddNewRecord" />
         <activity android:name=".Forecast" />
