@@ -309,7 +309,7 @@ public class TabActivity extends AppCompatActivity
                     return record;
                 case 2:
                     News news = new News();
-                    //return news;
+                    return news;
                 case 3:
                     Forecast forecast = new Forecast();
                     return forecast;
